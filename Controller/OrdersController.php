@@ -13,7 +13,9 @@ class OrdersController extends AppController {
  *
  * @var array
  */
+	public $helpers = array('Lang');
 	public $components = array('Paginator');
+	
 
 /**
  * index method
@@ -46,9 +48,11 @@ class OrdersController extends AppController {
  * @return void
  */
 	public function add() {
+	
 		if ($this->request->is('post')) {
 			$this->Order->create();
 			if ($this->Order->save($this->request->data)) {
+				$this->request->data('Order.user_id',$this->Auth->user('id'));
 				$this->Session->setFlash(__('The order has been saved.'));
 				return $this->redirect(array('controller' => 'orderslines', 'action' => 'add'));
 			} else {

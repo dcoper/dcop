@@ -3,13 +3,13 @@
 	<fieldset>
 		<legend><?php echo __('Add Order'); ?></legend>
 	<?php
-		echo $this->Form->input('user_id');
-		echo $this->Form->input('dcop_userid');
+	
 		echo $this->Form->input('ship_to_customerid');
 		echo $this->Form->input('ship_to_street');
 		echo $this->Form->input('ship_to_city');
 		echo $this->Form->input('ship_to_state');
-		echo $this->Form->input('ship_to_country');
+		// echo $this->Form->input('ship_to_country');
+		echo $this->Lang->countrySelect('Foo.country', array('label' => __('Country', true) ));  
 		echo $this->Form->input('external_orderid');
 		echo $this->Form->input('requested_delivery_date');
 		echo $this->Form->input('status');

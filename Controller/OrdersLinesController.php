@@ -46,10 +46,16 @@ class OrdersLinesController extends AppController {
  * @return void
  */
 	public function add() {
-	      
+	   $this->loadModel('Product');
+		
+	
 		if ($this->request->is('post')) {
+		    
 			$this->OrdersLine->create();
 			
+			$productsid = $this->Product->find('first', array('conditions' => array('Product.part_number' => '555')));
+	//		$this->request->data('OrdersLine.product_id',$this->$productsid['Product']['id']);
+			$this->request->data('OrdersLine.product_id',$productsid['Product']['id']);
 			$this->request->data('OrdersLine.order_id',$this->request->query['ordid']);
 			$this->request->data('OrdersLine.line_number',$this->request->query['lineid']);
 			if ($this->OrdersLine->save($this->request->data)) {

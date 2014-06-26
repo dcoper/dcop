@@ -4,8 +4,8 @@
 		<legend><?php echo __('Add Orders Line'); ?></legend>
 	<?php
 
-		echo $this->Form->input('product_id');
-		echo $this->element('productsearch');
+	//	echo $this->Form->input('product_id');
+		echo $this->Form->input('sku');
 		echo $this->Form->input('quantity');
 		echo $this->Form->input('comments');
 		

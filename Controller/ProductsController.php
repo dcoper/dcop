@@ -13,7 +13,7 @@ class ProductsController extends AppController {
  *
  * @var array
  */
-	public $components = array('Paginator');
+	public $components = array('Paginator','Search.Prg');
 
 /**
  * index method
@@ -21,6 +21,7 @@ class ProductsController extends AppController {
  * @return void
  */
 	public function index() {
+	
 		$this->Product->recursive = 0;
 		$this->set('products', $this->Paginator->paginate());
 	}
@@ -33,6 +34,9 @@ class ProductsController extends AppController {
  * @return void
  */
 	public function view($id = null) {
+	
+	
+		
 		if (!$this->Product->exists($id)) {
 			throw new NotFoundException(__('Invalid product'));
 		}
@@ -108,4 +112,16 @@ class ProductsController extends AppController {
 		}
 		return $this->redirect(array('action' => 'index'));
 	}
+	
+	public function find() {
+	$products = $this->paginate();
+        if ($this->request->is('requested')) {
+            return $products;
+        } else {
+            $this->set('products', $products);
+        }
+        $this->Prg->commonProcess();
+        $this->Paginator->settings['conditions'] = $this->Product->parseCriteria($this->Prg->parsedParams());
+        $this->set('products', $this->Paginator->paginate());
+    }
 }

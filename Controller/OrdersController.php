@@ -54,7 +54,8 @@ class OrdersController extends AppController {
 			if ($this->Order->save($this->request->data)) {
 				$this->request->data('Order.user_id',$this->Auth->user('id'));
 				$this->Session->setFlash(__('The order has been saved.'));
-				return $this->redirect(array('controller' => 'orderslines', 'action' => 'add'));
+
+				return $this->redirect(array('controller' => 'orderslines', 'action' => 'add','?' => array('ordid' => $this->Order->id, 'lineid' => 1)));
 			} else {
 				$this->Session->setFlash(__('The order could not be saved. Please, try again.'));
 			}

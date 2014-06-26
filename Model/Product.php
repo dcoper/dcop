@@ -13,6 +13,26 @@ class Product extends AppModel {
  *
  * @var array
  */
+ 
+ public $actsAs = array(
+        'Search.Searchable'
+    );
+	
+	public $filterArgs = array(
+        'description' => array(
+            'type' => 'like',
+            'field' => 'description'
+        ),
+        'part_number' => array(
+            'type' => 'like',
+            'field' => 'part_number'
+        ),
+		
+		'search' => array(
+            'type' => 'like',
+            'field' => 'Product.part_number'
+        )
+    );
 	public $validate = array(
 		'user_id' => array(
 			'numeric' => array(

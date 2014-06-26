@@ -47,6 +47,7 @@ $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
 			<?php echo $this->Session->flash(); ?>
 
 			<?php echo $this->fetch('content'); ?>
+			<div id="popups" style="z-index: 1000;"></div>
 		</div>
 		<div id="footer">
 			<?php echo $this->Html->link(

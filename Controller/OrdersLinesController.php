@@ -46,11 +46,15 @@ class OrdersLinesController extends AppController {
  * @return void
  */
 	public function add() {
+	      
 		if ($this->request->is('post')) {
 			$this->OrdersLine->create();
+			
+			$this->request->data('OrdersLine.order_id',$this->request->query['ordid']);
+			$this->request->data('OrdersLine.line_number',$this->request->query['lineid']);
 			if ($this->OrdersLine->save($this->request->data)) {
 				$this->Session->setFlash(__('The orders line has been saved.'));
-				return $this->redirect(array('action' => 'index'));
+				return $this->redirect(array('controller' => 'orderslines', 'action' => 'add','?' => array('ordid' => $this->request->query['ordid'], 'lineid' => ($this->request->query['lineid'] + 1 ))));
 			} else {
 				$this->Session->setFlash(__('The orders line could not be saved. Please, try again.'));
 			}

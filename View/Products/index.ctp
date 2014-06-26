@@ -1,9 +1,29 @@
 <div class="products index">
+<?php echo $this->Form->create('Product', array(
+    'url' => array_merge(
+            array(
+                'action' => 'find'
+            ),
+            $this->params['pass']
+        )
+    )
+);
+echo $this->Form->input('part_number', array(
+        'div' => false
+    )
+);
+
+echo $this->Form->submit(__('Search'), array(
+        'div' => false
+    )
+);
+echo $this->Form->end();
+
+?>
 	<h2><?php echo __('Products'); ?></h2>
 	<table cellpadding="0" cellspacing="0">
 	<tr>
-			<th><?php echo $this->Paginator->sort('id'); ?></th>
-			<th><?php echo $this->Paginator->sort('user_id'); ?></th>
+			<th><?php echo $this->Paginator->sort('part_number'); ?></th>
 			<th><?php echo $this->Paginator->sort('description'); ?></th>
 			<th><?php echo $this->Paginator->sort('group_id'); ?></th>
 			<th><?php echo $this->Paginator->sort('uom'); ?></th>
@@ -23,10 +43,7 @@
 	</tr>
 	<?php foreach ($products as $product): ?>
 	<tr>
-		<td><?php echo h($product['Product']['id']); ?>&nbsp;</td>
-		<td>
-			<?php echo $this->Html->link($product['User']['id'], array('controller' => 'users', 'action' => 'view', $product['User']['id'])); ?>
-		</td>
+		<td><?php echo h($product['Product']['part_number']); ?>&nbsp;</td>
 		<td><?php echo h($product['Product']['description']); ?>&nbsp;</td>
 		<td>
 			<?php echo $this->Html->link($product['Group']['name'], array('controller' => 'groups', 'action' => 'view', $product['Group']['id'])); ?>
@@ -37,7 +54,6 @@
 		<td><?php echo h($product['Product']['height']); ?>&nbsp;</td>
 		<td><?php echo h($product['Product']['barcode']); ?>&nbsp;</td>
 		<td><?php echo h($product['Product']['barcode_system']); ?>&nbsp;</td>
-		<td><?php echo h($product['Product']['part_number']); ?>&nbsp;</td>
 		<td><?php echo h($product['Product']['packaging_material']); ?>&nbsp;</td>
 		<td><?php echo h($product['Product']['packaging_instructions']); ?>&nbsp;</td>
 		<td><?php echo h($product['Product']['value']); ?>&nbsp;</td>

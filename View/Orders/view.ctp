@@ -16,27 +16,27 @@
 			<?php echo h($order['Order']['dcop_userid']); ?>
 			&nbsp;
 		</dd>
-		<dt><?php echo __('Ship To Customerid'); ?></dt>
+		<dt><?php echo __('Customer Name'); ?></dt>
 		<dd>
 			<?php echo h($order['Order']['ship_to_customerid']); ?>
 			&nbsp;
 		</dd>
-		<dt><?php echo __('Ship To Street'); ?></dt>
+		<dt><?php echo __('Street'); ?></dt>
 		<dd>
 			<?php echo h($order['Order']['ship_to_street']); ?>
 			&nbsp;
 		</dd>
-		<dt><?php echo __('Ship To City'); ?></dt>
+		<dt><?php echo __('City'); ?></dt>
 		<dd>
 			<?php echo h($order['Order']['ship_to_city']); ?>
 			&nbsp;
 		</dd>
-		<dt><?php echo __('Ship To State'); ?></dt>
+		<dt><?php echo __('State'); ?></dt>
 		<dd>
 			<?php echo h($order['Order']['ship_to_state']); ?>
 			&nbsp;
 		</dd>
-		<dt><?php echo __('Ship To Country'); ?></dt>
+		<dt><?php echo __('Country'); ?></dt>
 		<dd>
 			<?php echo h($order['Order']['ship_to_country']); ?>
 			&nbsp;
@@ -53,7 +53,7 @@
 		</dd>
 		<dt><?php echo __('Status'); ?></dt>
 		<dd>
-			<?php echo h($order['Order']['status']); ?>
+			<?php echo h($order['Order']['status_id']); ?>
 			&nbsp;
 		</dd>
 		<dt><?php echo __('Comments'); ?></dt>
@@ -62,6 +62,50 @@
 			&nbsp;
 		</dd>
 	</dl>
+</div>
+<div class="ordersLines index">
+	<h2><?php echo __('Orders Lines'); ?></h2>
+	<table cellpadding="0" cellspacing="0">
+	<tr>
+			<th><?php echo $this->Paginator->sort('order_id'); ?></th>
+			<th><?php echo $this->Paginator->sort('line_number'); ?></th>
+			<th><?php echo $this->Paginator->sort('product_id'); ?></th>
+			<th><?php echo $this->Paginator->sort('quantity'); ?></th>
+			<th><?php echo $this->Paginator->sort('comments'); ?></th>
+			<th class="actions"><?php echo __('Actions'); ?></th>
+	</tr>
+	<?php foreach ($ordersLines as $ordersLine): ?>
+	<tr>
+		<td>
+			<?php echo $this->Html->link($ordersLine['Order']['id'], array('controller' => 'orders', 'action' => 'view', $ordersLine['Order']['id'])); ?>
+		</td>
+		<td><?php echo h($ordersLine['OrdersLine']['line_number']); ?>&nbsp;</td>
+		<td>
+			<?php echo $this->Html->link($ordersLine['Product']['description'], array('controller' => 'products', 'action' => 'view', $ordersLine['Product']['id'])); ?>
+		</td>
+		<td><?php echo h($ordersLine['OrdersLine']['quantity']); ?>&nbsp;</td>
+		<td><?php echo h($ordersLine['OrdersLine']['comments']); ?>&nbsp;</td>
+		<td class="actions">
+			<?php echo $this->Html->link(__('View'), array('controller' => 'orderslines','action' => 'view', $ordersLine['OrdersLine']['id'])); ?>
+			<?php echo $this->Html->link(__('Edit'), array('controller' => 'orderslines','action' => 'edit', $ordersLine['OrdersLine']['id'])); ?>
+			<?php echo $this->Form->postLink(__('Delete'), array('controller' => 'orderslines','action' => 'delete', $ordersLine['OrdersLine']['id']), array(), __('Are you sure you want to delete # %s?', $ordersLine['OrdersLine']['id'])); ?>
+		</td>
+	</tr>
+<?php endforeach; ?>
+	</table>
+	<p>
+	<?php
+	echo $this->Paginator->counter(array(
+	'format' => __('Page {:page} of {:pages}, showing {:current} records out of {:count} total, starting on record {:start}, ending on {:end}')
+	));
+	?>	</p>
+	<div class="paging">
+	<?php
+		echo $this->Paginator->prev('< ' . __('previous'), array(), null, array('class' => 'prev disabled'));
+		echo $this->Paginator->numbers(array('separator' => ''));
+		echo $this->Paginator->next(__('next') . ' >', array(), null, array('class' => 'next disabled'));
+	?>
+	</div>
 </div>
 <div class="actions">
 	<h3><?php echo __('Actions'); ?></h3>

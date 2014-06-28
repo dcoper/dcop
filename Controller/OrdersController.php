@@ -35,6 +35,9 @@ class OrdersController extends AppController {
  * @return void
  */
 	public function view($id = null) {
+		$this->loadModel('OrdersLine');
+		$orderslines = $this->OrdersLine->find('all', array('conditions' => array('OrdersLine.order_id' => $id)));
+		$this->set('ordersLines', $orderslines,$this->Paginator->paginate());
 		if (!$this->Order->exists($id)) {
 			throw new NotFoundException(__('Invalid order'));
 		}
@@ -48,11 +51,22 @@ class OrdersController extends AppController {
  * @return void
  */
 	public function add() {
-	
+	$this->loadModel('Event');
 		if ($this->request->is('post')) {
 			$this->Order->create();
-			if ($this->Order->save($this->request->data)) {
-				$this->request->data('Order.user_id',$this->Auth->user('id'));
+			$this->request->data('Order.user_id',$this->Auth->user('id'));
+			$this->request->data('Order.status_id',1);
+		
+			$this->request->data('Event.user_id',$this->Auth->user('id'));
+		    $this->request->data('Event.object_type_id',2);
+			$this->request->data('Event.status_id',1);
+		    if ($this->Event->save($this->request->data)) {			
+				echo "";
+			} else {
+				echo "";
+			}
+		
+			if ($this->Order->save($this->request->data)) {			
 				$this->Session->setFlash(__('The order has been saved.'));
 
 				return $this->redirect(array('controller' => 'orderslines', 'action' => 'add','?' => array('ordid' => $this->Order->id, 'lineid' => 1)));

@@ -47,17 +47,24 @@ class OrdersLinesController extends AppController {
  */
 	public function add() {
 	   $this->loadModel('Product');
+	//   $this->loadModel('Product');
 		
 	
 		if ($this->request->is('post')) {
 		    
 			$this->OrdersLine->create();
 			
-			$productsid = $this->Product->find('first', array('conditions' => array('Product.part_number' => '555')));
-	//		$this->request->data('OrdersLine.product_id',$this->$productsid['Product']['id']);
+			$productsid = $this->Product->find('first', array('conditions' => array('Product.part_number' => $this->data['OrdersLine']['sku'])));
+			if(empty($productsid))
+			{
+				$this->Session->setFlash(__('Could not find SKU.'));
+				$this->redirect(array('controller' => 'orderslines', 'action' => 'add','?' => array('ordid' => $this->request->query['ordid'], 'lineid' => ($this->request->query['lineid'] ))));
+				}
 			$this->request->data('OrdersLine.product_id',$productsid['Product']['id']);
+			$this->request->data('OrdersLine.status_id',1);
 			$this->request->data('OrdersLine.order_id',$this->request->query['ordid']);
 			$this->request->data('OrdersLine.line_number',$this->request->query['lineid']);
+			$this->request->data('OrdersLine.user_id',$this->Auth->user('id'));
 			if ($this->OrdersLine->save($this->request->data)) {
 				$this->Session->setFlash(__('The orders line has been saved.'));
 				return $this->redirect(array('controller' => 'orderslines', 'action' => 'add','?' => array('ordid' => $this->request->query['ordid'], 'lineid' => ($this->request->query['lineid'] + 1 ))));
@@ -65,9 +72,10 @@ class OrdersLinesController extends AppController {
 				$this->Session->setFlash(__('The orders line could not be saved. Please, try again.'));
 			}
 		}
+		$currenOrder = $this->OrdersLine->Order->find('first', array('conditions' => array('Order.id' => $this->request->query['ordid'])));
 		$orders = $this->OrdersLine->Order->find('list');
 		$products = $this->OrdersLine->Product->find('list');
-		$this->set(compact('orders', 'products'));
+		$this->set(compact('orders', 'products','currenOrder'));
 	}
 
 /**

@@ -1,10 +1,15 @@
 <div class="ordersLines form">
 <?php echo $this->Form->create('OrdersLine'); ?>
 	<fieldset>
-		<legend><?php echo __('Add Orders Line'); ?></legend>
-	<?php
 
-	//	echo $this->Form->input('product_id');
+		<legend><?php echo __('Add Orders Line for order number');  ?></legend>
+		<?php echo $this->Html->link(__($currenOrder['Order']['external_orderid']), array('controller' => 'orders', 'action' => 'view')); ?>
+	
+		
+	<?php
+	
+		
+	//	echo $this->Form->input('product_id')
 		echo $this->Form->input('sku');
 		echo $this->Form->input('quantity');
 		echo $this->Form->input('comments');

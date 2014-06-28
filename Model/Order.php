@@ -35,7 +35,7 @@ class Order extends AppModel {
 		),
 		'ship_to_customerid' => array(
 			'numeric' => array(
-				'rule' => array('numeric'),
+				'rule' => array('notEmpty'),
 				//'message' => 'Your custom message here',
 				//'allowEmpty' => false,
 				//'required' => false,

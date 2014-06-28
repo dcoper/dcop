@@ -4,15 +4,14 @@
 		<legend><?php echo __('Add Order'); ?></legend>
 	<?php
 	
-		echo $this->Form->input('ship_to_customerid');
-		echo $this->Form->input('ship_to_street');
-		echo $this->Form->input('ship_to_city');
-		echo $this->Form->input('ship_to_state');
-		// echo $this->Form->input('ship_to_country');
-		echo $this->Lang->countrySelect('Foo.country', array('label' => __('Country', true) ));  
-		echo $this->Form->input('external_orderid');
-		echo $this->Form->input('requested_delivery_date');
-		echo $this->Form->input('status');
+		echo $this->Form->input('ship_to_customerid',array('label' => 'Customer name'));
+		echo $this->Form->input('ship_to_street',array('label' => 'Street'));
+		echo $this->Form->input('ship_to_city',array('label' => 'City'));
+		echo $this->Form->input('ship_to_zip',array('label' => 'Zip'));
+		echo $this->Lang->countrySelect('Order.ship_to_country', array('label' => __('Country', true)  ));
+        echo $this->Lang->stateSelect('Order.ship_to_state', array('label' => __('State', true)  ));		
+		echo $this->Form->input('external_orderid',array('label' => 'Order Number'));
+		echo $this->Form->input('requested_delivery_date',array('label' => 'Requested Delivery Date'));
 		echo $this->Form->input('comments');
 	?>
 	</fieldset>

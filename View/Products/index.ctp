@@ -36,7 +36,7 @@ echo $this->Form->end();
 			<th><?php echo $this->Paginator->sort('packaging_material'); ?></th>
 			<th><?php echo $this->Paginator->sort('packaging_instructions'); ?></th>
 			<th><?php echo $this->Paginator->sort('value'); ?></th>
-			<th><?php echo $this->Paginator->sort('status'); ?></th>
+			<th><?php echo $this->Paginator->sort('status_id'); ?></th>
 			<th><?php echo $this->Paginator->sort('ebay_itemlist_url'); ?></th>
 			<th><?php echo $this->Paginator->sort('created'); ?></th>
 			<th class="actions"><?php echo __('Actions'); ?></th>
@@ -57,7 +57,7 @@ echo $this->Form->end();
 		<td><?php echo h($product['Product']['packaging_material']); ?>&nbsp;</td>
 		<td><?php echo h($product['Product']['packaging_instructions']); ?>&nbsp;</td>
 		<td><?php echo h($product['Product']['value']); ?>&nbsp;</td>
-		<td><?php echo h($product['Product']['status']); ?>&nbsp;</td>
+		<td><?php echo h($product['Product']['status_id']); ?>&nbsp;</td>
 		<td><?php echo h($product['Product']['ebay_itemlist_url']); ?>&nbsp;</td>
 		<td><?php echo h($product['Product']['created']); ?>&nbsp;</td>
 		<td class="actions">

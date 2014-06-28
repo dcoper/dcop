@@ -12,7 +12,7 @@
 			<th><?php echo $this->Paginator->sort('ship_to_country'); ?></th>
 			<th><?php echo $this->Paginator->sort('external_orderid'); ?></th>
 			<th><?php echo $this->Paginator->sort('requested_delivery_date'); ?></th>
-			<th><?php echo $this->Paginator->sort('status'); ?></th>
+			<th><?php echo $this->Paginator->sort('status_id'); ?></th>
 			<th><?php echo $this->Paginator->sort('comments'); ?></th>
 			<th class="actions"><?php echo __('Actions'); ?></th>
 	</tr>
@@ -30,7 +30,7 @@
 		<td><?php echo h($order['Order']['ship_to_country']); ?>&nbsp;</td>
 		<td><?php echo h($order['Order']['external_orderid']); ?>&nbsp;</td>
 		<td><?php echo h($order['Order']['requested_delivery_date']); ?>&nbsp;</td>
-		<td><?php echo h($order['Order']['status']); ?>&nbsp;</td>
+		<td><?php echo h($order['Order']['status_id']); ?>&nbsp;</td>
 		<td><?php echo h($order['Order']['comments']); ?>&nbsp;</td>
 		<td class="actions">
 			<?php echo $this->Html->link(__('View'), array('action' => 'view', $order['Order']['id'])); ?>

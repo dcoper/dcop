@@ -23,42 +23,31 @@ echo $this->Form->end();
 	<h2><?php echo __('Products'); ?></h2>
 	<table cellpadding="0" cellspacing="0">
 	<tr>
+			<th><?php echo $this->Paginator->sort('name'); ?></th>
 			<th><?php echo $this->Paginator->sort('part_number'); ?></th>
 			<th><?php echo $this->Paginator->sort('description'); ?></th>
 			<th><?php echo $this->Paginator->sort('group_id'); ?></th>
 			<th><?php echo $this->Paginator->sort('uom'); ?></th>
-			<th><?php echo $this->Paginator->sort('weight'); ?></th>
-			<th><?php echo $this->Paginator->sort('width'); ?></th>
-			<th><?php echo $this->Paginator->sort('height'); ?></th>
 			<th><?php echo $this->Paginator->sort('barcode'); ?></th>
-			<th><?php echo $this->Paginator->sort('barcode_system'); ?></th>
+			<th><?php echo $this->Paginator->sort('barcode_standard_id'); ?></th>
 			<th><?php echo $this->Paginator->sort('part_number'); ?></th>
-			<th><?php echo $this->Paginator->sort('packaging_material'); ?></th>
-			<th><?php echo $this->Paginator->sort('packaging_instructions'); ?></th>
 			<th><?php echo $this->Paginator->sort('value'); ?></th>
 			<th><?php echo $this->Paginator->sort('status_id'); ?></th>
-			<th><?php echo $this->Paginator->sort('ebay_itemlist_url'); ?></th>
 			<th><?php echo $this->Paginator->sort('created'); ?></th>
 			<th class="actions"><?php echo __('Actions'); ?></th>
 	</tr>
 	<?php foreach ($products as $product): ?>
 	<tr>
+		<td><?php echo h($product['Product']['name']); ?>&nbsp;</td>
 		<td><?php echo h($product['Product']['part_number']); ?>&nbsp;</td>
 		<td><?php echo h($product['Product']['description']); ?>&nbsp;</td>
 		<td>
 			<?php echo $this->Html->link($product['Group']['name'], array('controller' => 'groups', 'action' => 'view', $product['Group']['id'])); ?>
 		</td>
 		<td><?php echo h($product['Product']['uom']); ?>&nbsp;</td>
-		<td><?php echo h($product['Product']['weight']); ?>&nbsp;</td>
-		<td><?php echo h($product['Product']['width']); ?>&nbsp;</td>
-		<td><?php echo h($product['Product']['height']); ?>&nbsp;</td>
 		<td><?php echo h($product['Product']['barcode']); ?>&nbsp;</td>
-		<td><?php echo h($product['Product']['barcode_system']); ?>&nbsp;</td>
-		<td><?php echo h($product['Product']['packaging_material']); ?>&nbsp;</td>
-		<td><?php echo h($product['Product']['packaging_instructions']); ?>&nbsp;</td>
 		<td><?php echo h($product['Product']['value']); ?>&nbsp;</td>
 		<td><?php echo h($product['Product']['status_id']); ?>&nbsp;</td>
-		<td><?php echo h($product['Product']['ebay_itemlist_url']); ?>&nbsp;</td>
 		<td><?php echo h($product['Product']['created']); ?>&nbsp;</td>
 		<td class="actions">
 			<?php echo $this->Html->link(__('View'), array('action' => 'view', $product['Product']['id'])); ?>

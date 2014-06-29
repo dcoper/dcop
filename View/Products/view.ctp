@@ -11,6 +11,11 @@
 			<?php echo $this->Html->link($product['User']['id'], array('controller' => 'users', 'action' => 'view', $product['User']['id'])); ?>
 			&nbsp;
 		</dd>
+		<dt><?php echo __('Name'); ?></dt>
+		<dd>
+			<?php echo h($product['Product']['name']); ?>
+			&nbsp;
+		</dd>
 		<dt><?php echo __('Description'); ?></dt>
 		<dd>
 			<?php echo h($product['Product']['description']); ?>
@@ -48,17 +53,17 @@
 		</dd>
 		<dt><?php echo __('Barcode System'); ?></dt>
 		<dd>
-			<?php echo h($product['Product']['barcode_system']); ?>
+			<?php echo h($product['Product']['barcode_standards_id']); ?>
 			&nbsp;
 		</dd>
-		<dt><?php echo __('Part Number'); ?></dt>
+		<dt><?php echo __('SKU/Part Number'); ?></dt>
 		<dd>
 			<?php echo h($product['Product']['part_number']); ?>
 			&nbsp;
 		</dd>
 		<dt><?php echo __('Packaging Material'); ?></dt>
 		<dd>
-			<?php echo h($product['Product']['packaging_material']); ?>
+			<?php echo h($product['Product']['packaging_material_id']); ?>
 			&nbsp;
 		</dd>
 		<dt><?php echo __('Packaging Instructions'); ?></dt>
@@ -73,7 +78,7 @@
 		</dd>
 		<dt><?php echo __('Status'); ?></dt>
 		<dd>
-			<?php echo h($product['Product']['status']); ?>
+			<?php echo h($product['Product']['status_id']); ?>
 			&nbsp;
 		</dd>
 		<dt><?php echo __('Ebay Itemlist Url'); ?></dt>

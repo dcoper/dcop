@@ -54,6 +54,12 @@ class Product extends AppModel {
 				//'on' => 'create', // Limit validation to 'create' or 'update' operations
 			),
 		),
+		'name' => array(
+	            'between' => array(
+                'rule'    => array('between', 1, 25),
+                'message' => 'Barcode should contain between 1-25 chars.'
+            ),
+		),
 		'group_id' => array(
 			'numeric' => array(
 				'rule' => array('numeric'),
@@ -74,7 +80,7 @@ class Product extends AppModel {
 				//'on' => 'create', // Limit validation to 'create' or 'update' operations
 			),
 		),
-		'packaging_material' => array(
+		'packaging_material_id' => array(
 			'notEmpty' => array(
 				'rule' => array('notEmpty'),
 				//'message' => 'Your custom message here',
@@ -84,6 +90,20 @@ class Product extends AppModel {
 				//'on' => 'create', // Limit validation to 'create' or 'update' operations
 			),
 		),
+		
+		'barcode' => array(
+			'numeric' => array(
+                'rule'     => 'numeric',
+                'required' => true,
+                'message'  => 'Numbers only'
+            ),
+            'between' => array(
+                'rule'    => array('between', 12, 13),
+                'message' => 'Barcode should contain between 12-13 chars.'
+            ),
+		),
+		
+		
 		'status' => array(
 			'notEmpty' => array(
 				'rule' => array('notEmpty'),
@@ -117,6 +137,13 @@ class Product extends AppModel {
 		'User' => array(
 			'className' => 'User',
 			'foreignKey' => 'user_id',
+			'conditions' => '',
+			'fields' => '',
+			'order' => ''
+		),
+		'BarcodeStandard' => array(
+			'className' => 'BarcodeStandard',
+			'foreignKey' => 'barcode_standards_id',
 			'conditions' => '',
 			'fields' => '',
 			'order' => ''

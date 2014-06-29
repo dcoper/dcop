@@ -54,13 +54,19 @@ class OrdersLinesController extends AppController {
 		    
 			$this->OrdersLine->create();
 			
+			//Search by SKU if product_id is empty
+			if(empty($this->data['OrdersLine']['product_id']))
+			{
 			$productsid = $this->Product->find('first', array('conditions' => array('Product.part_number' => $this->data['OrdersLine']['sku'])));
+			$this->request->data('OrdersLine.product_id',$productsid['Product']['id']);
 			if(empty($productsid))
 			{
 				$this->Session->setFlash(__('Could not find SKU.'));
 				$this->redirect(array('controller' => 'orderslines', 'action' => 'add','?' => array('ordid' => $this->request->query['ordid'], 'lineid' => ($this->request->query['lineid'] ))));
 				}
-			$this->request->data('OrdersLine.product_id',$productsid['Product']['id']);
+			} else {
+			$this->request->data('OrdersLine.product_id',$this->data['OrdersLine']['product_id']);
+			}
 			$this->request->data('OrdersLine.status_id',1);
 			$this->request->data('OrdersLine.order_id',$this->request->query['ordid']);
 			$this->request->data('OrdersLine.line_number',$this->request->query['lineid']);

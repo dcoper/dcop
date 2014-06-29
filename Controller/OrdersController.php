@@ -34,6 +34,17 @@ class OrdersController extends AppController {
  * @param string $id
  * @return void
  */
+	public function getExternalOrder($id = null) {
+		$this->loadModel('OrdersLine');
+		$orderslines = $this->OrdersLine->find('all', array('conditions' => array('OrdersLine.order_id' => $id)));
+		$this->set('ordersLines', $orderslines,$this->Paginator->paginate());
+		if (!$this->Order->exists($id)) {
+			throw new NotFoundException(__('Invalid order'));
+		}
+		$options = array('conditions' => array('Order.' . $this->Order->primaryKey => $id));
+		$this->set('order', $this->Order->find('first', $options));
+	}
+	
 	public function view($id = null) {
 		$this->loadModel('OrdersLine');
 		$orderslines = $this->OrdersLine->find('all', array('conditions' => array('OrdersLine.order_id' => $id)));

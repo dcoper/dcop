@@ -13,7 +13,7 @@ class OrdersLinesController extends AppController {
  *
  * @var array
  */
-	public $components = array('Paginator');
+	public $components = array('Paginator','EventRegister');
 
 /**
  * index method
@@ -72,6 +72,7 @@ class OrdersLinesController extends AppController {
 			$this->request->data('OrdersLine.line_number',$this->request->query['lineid']);
 			$this->request->data('OrdersLine.user_id',$this->Auth->user('id'));
 			if ($this->OrdersLine->save($this->request->data)) {
+				$this->EventRegister->addEvent(3,1,$this->Auth->user('id'));
 				$this->Session->setFlash(__('The orders line has been saved.'));
 				return $this->redirect(array('controller' => 'orderslines', 'action' => 'add','?' => array('ordid' => $this->request->query['ordid'], 'lineid' => ($this->request->query['lineid'] + 1 ))));
 			} else {

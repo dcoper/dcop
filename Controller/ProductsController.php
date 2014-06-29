@@ -13,7 +13,7 @@ class ProductsController extends AppController {
  *
  * @var array
  */
-	public $components = array('Paginator','Search.Prg');
+	public $components = array('Paginator','Search.Prg','EventRegister');
 
 /**
  * index method
@@ -54,6 +54,7 @@ class ProductsController extends AppController {
 			$this->Product->create();
 			$this->request->data('Product.user_id',$this->Auth->user('id'));
 			if ($this->Product->save($this->request->data)) {
+				$this->EventRegister->addEvent(1,1,$this->Auth->user('id'));
 				$this->Session->setFlash(__('The product has been saved.'));
 				return $this->redirect(array('action' => 'index'));
 			} else {

@@ -14,7 +14,7 @@ class OrdersController extends AppController {
  * @var array
  */
 	public $helpers = array('Lang');
-	public $components = array('Paginator');
+	public $components = array('Paginator','EventRegister');
 	
 
 /**
@@ -62,24 +62,15 @@ class OrdersController extends AppController {
  * @return void
  */
 	public function add() {
-	$this->loadModel('Event');
+
 		if ($this->request->is('post')) {
 			$this->Order->create();
 			$this->request->data('Order.user_id',$this->Auth->user('id'));
-			$this->request->data('Order.status_id',1);
-		
-			$this->request->data('Event.user_id',$this->Auth->user('id'));
-		    $this->request->data('Event.object_type_id',2);
-			$this->request->data('Event.status_id',1);
-		    if ($this->Event->save($this->request->data)) {			
-				echo "";
-			} else {
-				echo "";
-			}
-		
-			if ($this->Order->save($this->request->data)) {			
-				$this->Session->setFlash(__('The order has been saved.'));
-
+			$this->request->data('Order.status_id',1);						
+				
+			if ($this->Order->save($this->request->data)) {		
+				$this->EventRegister->addEvent(2,1,2);
+				$this->Session->setFlash(__('The order has been saved.'));		
 				return $this->redirect(array('controller' => 'orderslines', 'action' => 'add','?' => array('ordid' => $this->Order->id, 'lineid' => 1)));
 			} else {
 				$this->Session->setFlash(__('The order could not be saved. Please, try again.'));
